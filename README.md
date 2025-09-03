@@ -14,7 +14,7 @@ Requires MATLAB 2024a or more recent.
 1. Click the green **"Code"** drop-down menu at the top of this page.  
 2. Select **"Download ZIP"**.  
 3. Unzip the contents into a local directory.  
-4. Open **`run_fig_2_main.m`** or **`run_fig_2_inset.m`** in MATLAB.  
+4. There is **`.m`** run file corresponding to each figure in the main text and supplement. Open your chosen run file.  
 5. In MATLAB, go to the **Editor** tab, select the **Editor** tab and then select **Run**.  
 6. View the generated figures in the "results" directory.
 
