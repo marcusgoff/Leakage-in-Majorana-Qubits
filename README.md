@@ -19,3 +19,5 @@ Requires MATLAB 2024a or more recent.
 6. View the generated figures in the "results" directory.
 
 ---
+## Citation
+If you find this code useful and use it in your own work, please cite us: https://arxiv.org/abs/2504.17485
