@@ -15,6 +15,7 @@
 %               
 %
 %----------------------------------------%
+disp('Running run_fig_S2.m');
 
 %% Setup
 clear all;
