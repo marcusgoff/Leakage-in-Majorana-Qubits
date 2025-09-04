@@ -29,7 +29,7 @@
 %   - Saves entire worskpace in the ./results directory
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+disp('Running run_fig_2_main.m');
 
 %% Environment Setup
 clear all; 
