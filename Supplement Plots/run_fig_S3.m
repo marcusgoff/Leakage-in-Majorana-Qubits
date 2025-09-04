@@ -17,6 +17,7 @@
 %   Authors: M. C. Goffage^1, A. Alase^2, M. C. Cassidy^1, S. N. Coppersmith^1
 %   Affiliations: ^1 University of New South Wales, ^2 University of Sydney
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+disp('Running run_fig_S3.m');
 
 %% Load QPP Library
 addpath('../QPP_Library_P1_submit');
