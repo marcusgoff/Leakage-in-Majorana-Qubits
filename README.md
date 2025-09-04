@@ -36,4 +36,4 @@ This work is currently posted on the arXiv at: https://arxiv.org/abs/2504.17485
 ---
 ## Troubleshooting
 
-If you have any issues with this code, please contact Marcus Goffage at m.goffage@unsw.edu.au. 
+If you have any issues with this code, please contact Marcus Goffage at m.goffage@unsw.edu.au.
