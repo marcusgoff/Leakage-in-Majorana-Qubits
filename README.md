@@ -13,7 +13,7 @@ Requires MATLAB 2024a or more recent.
 ## How to Run the Code 
 1. Download this entire repository as a ZIP. 
 2. Unzip the contents into a local directory.  
-3. There is **`.m`** run file corresponding to each figure in the main text and supplement. Open your chosen run file.  
+3. There is **`.m`** run file corresponding to each figure in the main text and Supplement. Open your chosen run file.  
 4. In MATLAB, select the **Editor** tab and then select **Run**.  
 5. View the generated figures in the "results" or "Supplement Plots/results" directory.
 
