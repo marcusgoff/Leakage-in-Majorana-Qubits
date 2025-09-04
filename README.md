@@ -3,6 +3,8 @@ This repository contains the MATLAB code for the numerical simulations in the pa
 
 Please note that this code uses the QPP_Library which is still work in progress, there are placeholders included for extended functionality that is yet to be added. All functionality used to generate results for our papers have been tested.
 
+This repository has been preserved on Zenodo at doi:10.5281/zenodo.17051699.
+
 ---
 
 ## Environment and Dependencies
