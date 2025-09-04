@@ -16,8 +16,8 @@
 %
 %----------------------------------------%
 %% Clear
-% clear all; 
-close all;
+clear all; 
+%close all;
 
 %% Get QPP Library
 addpath('QPP_Library_P1_submit');
@@ -34,11 +34,11 @@ basis = 'instant_hamil_basis';    % 'instant_hamil_basis', 'init_hamil_basis'
 %--------------------------%
 initial_state = "+";
 
-ramp_rate_vec = logspace(-4.5, 1, 5); 
+ramp_rate_vec = logspace(-4.5, 1, 500); 
 
-ramp_height_vec = [0.03, 0.1]; 
-% Examples: [0.01, 0.03, 0.05, 0.08, 0.1]; [0.001, 0.01, 0.1, 0.4, 0.65, 0.8]
-
+ramp_height_vec = [0.03, 0.1, 0.01]; % Run 0.01 as well, as this data is accessed
+                                     % in run_fig_S3.m in Supplementary
+                                     % Plots.
 
 % TETRON PARAMETERS
 mu_init  = 0;   % Initial chemical potential

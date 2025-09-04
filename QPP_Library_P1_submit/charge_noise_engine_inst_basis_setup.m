@@ -1,7 +1,8 @@
 %--------------------------------------%
 % Charge Noise Engine - General
 %--------------------------------------%
-% Author: Marcus Goffage
+% Author: Marcus C. Goffage
+% Affiliation: University of New South Wales
 %
 % General version of the charge noise engine for different inbuilt noise
 % types OR with your own imported noise trajectory.
@@ -248,14 +249,16 @@ function [omega_0_from_fit, T2_from_fit, omega_0_guess, X_exp_mean,...
         omega_0_from_fit = X_exp_fit.b;
         T2_from_fit = 1 ./ X_exp_fit.a;
     catch
-        warning('Fit failed');
+        % Note this fit is not used in the uploaded scripts for our paper. 
+        % So it is not an issue if this catch is reached. I use this in
+        % some other (not-yet-uploaded) code. 
         T2_from_fit = NaN;
         omega_0_from_fit = NaN;
         best_fit = zeros(size(t_vec));
     end
 
     if strcmp(plot_results, 'plot_X_exp_only') || strcmp(plot_results, 'plot_all_results')
-        error('plot_all_results and save_output not supported in this code version');
+        warning('plot_all_results and save_output not supported in this code version');
     end
 
     %--------------------------------------%

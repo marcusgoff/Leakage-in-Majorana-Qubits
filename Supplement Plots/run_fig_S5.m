@@ -1,8 +1,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Script: run_fig_2_inset.m
-% Purpose: Generate Figure 2-inset from the paper 
-%          "Leakage at Zero Temperature from Changes in Chemical Potential
-%           in Majorana Qubits"
+% Script: run_fig_S5.m
+% Purpose:
+%   Generate Figure S5 from the supplementary material of the paper:
+%   "Leakage at Zero Temperature from Changes in Chemical Potential
+%    in Majorana Qubits"
 %
 % Author: Marcus C. Goffage
 % Affiliation: University of New South Wales
@@ -18,14 +19,14 @@
 % ABOUT THIS SCRIPT
 % -------------------------------------------------------------------------
 % Description:
-%   - Generates Figure 2 Inset. 
+%   - Generates Figure S5
 %
 % Requirements:
 %   - MATLAB R2024 or newer
 %   - Dependencies: functions in /QPP_Library directory. 
 %
 % Output:
-%   - Saves Figure_2b in the ./results
+%   - Saves figures ./results
 %   - Saves entire worskpace in the ./results directory
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -34,33 +35,58 @@
 %% Environment Setup
 clear all; 
 %close all;
-addpath('QPP_Library_P1_submit')
+addpath('../QPP_Library_P1_submit')
 
+%% Global Parameters
+N_vec = 2:1:100; %2:1:100
+ramp_rate_constant = 1e-3;
+mu_init = 0;
+mu_offset = 0.0;
+w = 0.5;
+delta = 0.5;
+BC = "OBC";
+
+%% Subplot A
+ramp_height = 0.01;
+[L_odd_a, L_even_a, fig_a] = run_leakage_sim(ramp_height, N_vec, ramp_rate_constant, mu_init, mu_offset, w, delta, BC);
+saveas(fig_a, 'Results/fig_S5_a.png');    
+saveas(fig_a, 'Results/fig_S5_a.fig'); 
+clear fig_a plot_handles ax;
+
+%% Subplot B
+ramp_height = 0.03;
+[L_odd_b, L_even_b, fig_b] = run_leakage_sim(ramp_height, N_vec, ramp_rate_constant, mu_init, mu_offset, w, delta, BC);
+saveas(fig_b, 'Results/fig_S5_b.png');    
+saveas(fig_b, 'Results/fig_S5_b.fig'); 
+clear fig_b plot_handles ax;
+
+%% Subplot C
+ramp_height = 0.1;
+[L_odd_c, L_even_c, fig_c] = run_leakage_sim(ramp_height, N_vec, ramp_rate_constant, mu_init, mu_offset, w, delta, BC);
+saveas(fig_c, 'Results/fig_S5_c.png');    
+saveas(fig_c, 'Results/fig_S5_c.fig'); 
+clear fig_c plot_handles ax;
+
+%% Save Worskpace
+save('Results/fig_S5_data.mat');
+
+
+
+%% Local Functions
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+function [L_odd, L_even, currFig] = run_leakage_sim(ramp_height, N_vec, ramp_rate_constant, mu_init, mu_offset, w, delta, BC)
 
 %% Simulation Parameters
-% Ramp properties
-ramp_height = 0.03;             % ramp_height = mu_fin - mu_in 
-N_vec = 2:2:100;               % Kitaev chain lengths 
-ramp_rate_constant = 2e-2;      % Constant ramp rate
-
-% Tetron parameters
-mu_init   = 0;       
-mu_offset = 0.0; % DC offset in chemical potential between the chains    
-w         = 0.5;     
-delta     = 0.5;     
-BC        = "OBC";  
-
-% Simulation time
+% (Other parameters remain hardcoded)
 t_init           = 0;
 t_final_no_ramp  = 100; 
 
-% Noise / timestep parameters
 num_trials             = 1;       % Keep fixed at 1
 delta_mu_time_step_max = 1e-3;    % Max Δμ increase per timestep
 delta_t_max            = 1e-2;    % Maximum allowed timestep
 min_num_steps          = 5;       % Minimum steps per simulation
 
-% Covariance matrix method parameters
 use_parity_loss_or_subspace_leakage = 'parity_loss'; 
 simulation_type = 'ramp_up_stop'; 
 basis           = 'instant_hamil_basis'; 
@@ -73,17 +99,14 @@ BdG_leakage_mat = zeros(1, length(N_vec));
 L_BdG_mat       = zeros(length(N_vec), 1);
 L_BdG_comp_cell = cell(length(N_vec), 1);
 
-
-%% Compute Leakage using Covariance Matrix Method
 delta_t_cov_sim_vec = zeros(length(N_vec), 1); 
-L_p_mat    = zeros(length(N_vec), 1); % Parity Leakage (Leakage out of even 
-                                      % MZM parity sector
-L_gs_mat   = zeros(length(N_vec), 1); % Ground state leakage (leakage out of 
-                                      % the ground state manifold)
+L_p_mat    = zeros(length(N_vec), 1); 
+L_gs_mat   = zeros(length(N_vec), 1); 
 L_gs_mat_init = zeros(length(N_vec), 1); 
 L_p0_mat   = zeros(length(N_vec), 1); 
 L_c0_mat   = zeros(length(N_vec), 1);
 
+%% Main Loop
 for ii = 1:length(N_vec)
 
     fprintf('%i ', ii);
@@ -137,9 +160,6 @@ for ii = 1:length(N_vec)
     L_c0_mat(ii) = 1 - get_overlap_sq_quench_limit(mu_init, ramp_height, mu_offset, w, delta, N_curr, BC);
 end
 
-toc
-
-
 %% Plot Results (Adiabatic)
 L_odd  = L_p_mat;
 L_even = L_gs_mat - L_odd;
@@ -184,12 +204,6 @@ ylabel('Leakage');
 
 ylim([0, 1.2*max([L_even(:); L_odd(:)])]);
 
-
-%% Save Figure
-saveas(currFig, 'Results/fig_2_inset.png');    
-saveas(currFig, 'Results/fig_2_inset.fig'); 
+end
 
 
-%% Save Workspace
-clear currFig plot_handles ax;
-save('Results/fig_2_inset_data.mat');
