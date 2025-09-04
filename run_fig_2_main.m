@@ -15,6 +15,8 @@
 %               
 %
 %----------------------------------------%
+disp('Running run_fig_2_main.m');
+
 %% Clear
 clear all; 
 %close all;
