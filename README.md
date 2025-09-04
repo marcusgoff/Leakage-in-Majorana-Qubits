@@ -19,7 +19,7 @@ Requires MATLAB 2024a or more recent.
 
 ---
 
-## Run Files and their Outputs
+## Run Files 
 There is **`.m`** run file corresponding to each figure in the main text and supplement (within the Supplement Plots directory). You may run the file corresponding to your figure of interest. Note that **`run_fig_S3.m`** requires **`run_fig_2_main.m`** to be run first. All other run files have no dependencies.  
 
 Alternatively you may generate all figures using **`run_all_code.m`**, which has an expected run time of ~24 hours on a typical laptop.  
